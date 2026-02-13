@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Detective  - Leaderboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Campus Detective </h1>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="report.html">Report Item</a>
+                <a href="leaderboard.html" class="active">Leaderboard</a>
+                <button id="logoutBtn" class="btn btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="leaderboard-container">
+            <h2>🏆 Top 5 Helpers</h2>
+            <p class="leaderboard-subtitle">Users with the most returned items</p>
+            
+            <div id="leaderboardList" class="leaderboard-list">
+                <!-- Leaderboard will be dynamically loaded here -->
+            </div>
+
+            <div id="currentUserRank" class="current-user-rank">
+                <!-- Current user's rank will be shown here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function loadLeaderboard() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            // Sort users by points in descending order
+            const sortedUsers = users.sort((a, b) => b.points - a.points);
+            
+            // Get top 5
+            const top5 = sortedUsers.slice(0, 5);
+            
+            const leaderboardList = document.getElementById('leaderboardList');
+            
+            if (top5.length === 0) {
+                leaderboardList.innerHTML = '<p class="no-data">No users yet</p>';
+            } else {
+                leaderboardList.innerHTML = top5.map((user, index) => `
+                    <div class="leaderboard-item ${currentUser && user.email === currentUser.email ? 'current-user' : ''}">
+                        <div class="rank">#${index + 1}</div>
+                        <div class="user-info">
+                            <div class="user-name">${user.fullName}</div>
+                            <div class="user-campusid">${user.campusId}</div>
+                        </div>
+                        <div class="user-points">
+                            <span class="points-badge">${user.points} pts</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Show current user's rank if not in top 5
+            if (currentUser) {
+                const userIndex = sortedUsers.findIndex(u => u.email === currentUser.email);
+                if (userIndex >= 5) {
+                    document.getElementById('currentUserRank').innerHTML = `
+                        <div class="leaderboard-item current-user">
+                            <div class="rank">#${userIndex + 1}</div>
+                            <div class="user-info">
+                                <div class="user-name">${currentUser.fullName} (You)</div>
+                                <div class="user-campusid">${currentUser.campusId}</div>
+                            </div>
+                            <div class="user-points">
+                                <span class="points-badge">${currentUser.points} pts</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('currentUserRank').innerHTML = '';
+                }
+            }
+        }
+
+        // Check authentication
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            window.location.href = 'index.html';
+        }
+
+        // Load leaderboard
+        loadLeaderboard();
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        });
+
+        // Listen for points updates
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'users') {
+                loadLeaderboard();
+            }
+        });
+    </script>
+</body>
+</html>

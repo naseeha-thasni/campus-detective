@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Detective - Report Item</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo"> Campus Detective </h1>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="report.html" class="active">Report Item</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <button id="logoutBtn" class="btn btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="report-container">
+            <h2>Report Lost or Found Item</h2>
+            
+            <form id="reportForm" class="report-form">
+                <div class="form-group">
+                    <label>Item Type</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="itemType" value="lost" checked> Lost
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="itemType" value="found"> Found
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" name="itemName" placeholder="e.g., Water Bottle, Laptop, Keys" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="Where was it lost/found?" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Provide detailed description..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUpload">Image (Optional)</label>
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">Report Item</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/report.js"></script>
+</body>
+</html>
