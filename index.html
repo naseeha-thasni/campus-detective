@@ -9,20 +9,20 @@
 <body>
     <div class="container">
         <div class="auth-container">
-            <h1 class="logo"style="color: black;"> Campus Detective </h1>
-            <p class="tagline"style="color: black;">"കുന്തം പോയാൽ കുടത്തിലും തപ്പണം"</p>
+            <h1 class="logo"> Campus Detective</h1>
+            <p class="tagline">"കുന്തം പോയാൽ കുടത്തിലും തപ്പണം"</p>
             
             <form id="loginForm" class="auth-form">
-                <h2>Login to Your Account</h2>
+                <h2>Welcome Back!</h2>
                 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <input type="email" id="email" placeholder="Enter your email" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" placeholder="Enter your password" required>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -35,36 +35,29 @@
     </div>
 
     <script>
-        // Login functionality
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Get users from localStorage
             const users = JSON.parse(localStorage.getItem('users')) || [];
-            
-            // Find user with matching email and password
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                // Store current user in localStorage
                 localStorage.setItem('currentUser', JSON.stringify({
                     email: user.email,
                     fullName: user.fullName,
                     campusId: user.campusId,
                     points: user.points
                 }));
-                
-                // Redirect to home page
                 window.location.href = 'home.html';
             } else {
                 alert('Invalid email or password!');
             }
         });
 
-        // Check if user is already logged in
+        // Redirect if already logged in
         if (localStorage.getItem('currentUser')) {
             window.location.href = 'home.html';
         }
