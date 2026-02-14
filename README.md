@@ -120,9 +120,8 @@ Purpose:Helped structure project documentation and improve workflow ideas.
 
 ## Team Contributions
 
--Misna Mahar: Frontend pages (feed, report item, login), leaderboard logic
-
--Naseeha Thasni: Reward system, item claim logic, testing, documentation
+Misna Mahar: Frontend pages (feed, report item, login), leaderboard logic
+Naseeha Thasni: Reward system, item claim logic, testing, documentation
 ---
 
 Made with ❤️ at TinkerHub
