@@ -1,6 +1,5 @@
 <p align="center">
-  <img src=![download (2)](https://github.com/user-attachments/assets/d34b75e6-3f77-44f8-80c9-30c160e430bc)
-" alt="Project Banner" width="100%">
+  <img src="img.jpg" alt="Project Banner" width="100%">
 </p>
 
 ## campus detective
