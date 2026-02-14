@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img.jpg" alt="Project Banner" >
+  <img src="img.jpg" alt="Project Banner"width="300px" >
 </p>
 
 ## campus detective
